@@ -42,6 +42,7 @@
   }
 
   function showLogin() {
+    $('loading').hidden = true;
     $('admin').hidden = true;
     $('logout').hidden = true;
     $('login-form').hidden = false;
@@ -49,6 +50,7 @@
   }
 
   async function showAdmin() {
+    $('loading').hidden = true;
     $('login-form').hidden = true;
     $('admin').hidden = false;
     $('logout').hidden = false;
@@ -98,6 +100,9 @@
   async function openSession(id) {
     const { session, rows } = await api(`/api/admin/submissions?id=${id}`);
     state.current = session;
+    // The list was fetched earlier; bring this session's count up to date with what just loaded.
+    const listed = state.sessions.find(s => s.id === session.id);
+    if (listed) Object.assign(listed, session, { count: rows.length });
     renderSessions();
     $('detail').hidden = false;
     $('detail-title').textContent = `${session.course_date} ${session.title}`;
