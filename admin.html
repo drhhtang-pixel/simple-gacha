@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>教師管理 · MY SIMPLE GACHA</title>
+  <link rel="stylesheet" href="fonts/dotgothic16.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <div class="admin-head">
+      <h1 class="logo small-logo">教師管理</h1>
+      <div class="saves">
+        <a class="link-btn" href="/">◀ 回抽籤</a>
+        <button id="logout" type="button" class="small" hidden>登出</button>
+      </div>
+    </div>
+
+    <form id="login-form" class="field form narrow" hidden>
+      <label for="password">教師密碼</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <div class="actions"><button type="submit" class="primary">登入</button></div>
+    </form>
+
+    <div id="admin" hidden>
+      <form id="new-session" class="field form-inline">
+        <div class="field-head"><h2>開新課程</h2></div>
+        <label>日期 <input id="new-date" type="date" required></label>
+        <label>課程名稱 <input id="new-title" maxlength="60" required placeholder="例：設計思考 第3週"></label>
+        <button type="submit" class="small primary">＋ 建立並產生代碼</button>
+      </form>
+
+      <div class="field">
+        <div class="field-head"><h2>課程</h2></div>
+        <table class="grid list">
+          <thead><tr><th>日期</th><th>課程</th><th>代碼</th><th>人數</th><th>狀態</th><th></th></tr></thead>
+          <tbody id="sessions-body"></tbody>
+        </table>
+      </div>
+
+      <div id="detail" class="field" hidden>
+        <div class="field-head"><h2 id="detail-title"></h2></div>
+        <div class="saves">
+          <button id="use-in-gacha" type="button" class="small primary">▶ 用這份名單抽籤</button>
+          <a id="csv" class="link-btn" href="#">⬇ 匯出 CSV</a>
+          <button id="toggle-open" type="button" class="small"></button>
+          <button id="new-code" type="button" class="small">↻ 換新代碼</button>
+          <button id="delete-session" type="button" class="small danger">🗑 刪除課程</button>
+        </div>
+        <div class="share">
+          <img id="qr" alt="學生登記的 QR code" width="180" height="180">
+          <div>
+            <p>學生登記網址：</p>
+            <p><a id="join-link" href="#" target="_blank" rel="noopener"></a></p>
+            <p>班級代碼：<strong id="detail-code" class="code"></strong></p>
+          </div>
+        </div>
+        <table class="grid list">
+          <thead><tr><th>學號</th><th>姓名</th><th class="num">組別</th><th>最後更新</th><th></th></tr></thead>
+          <tbody id="rows-body"></tbody>
+        </table>
+        <p id="rows-empty" class="saves-note" hidden>還沒有學生登記。</p>
+      </div>
+    </div>
+    <ul id="messages" class="messages" aria-live="polite"></ul>
+  </main>
+  <footer class="credit">design by 陳愷 2026</footer>
+  <dialog id="confirm" class="pixel-dialog">
+    <p id="confirm-text"></p>
+    <div class="actions">
+      <button id="confirm-no" type="button">取消</button>
+      <button id="confirm-yes" type="button" class="primary">確定</button>
+    </div>
+  </dialog>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="src/admin.js"></script>
+</body>
+</html>

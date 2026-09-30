@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>分組登記 · MY SIMPLE GACHA</title>
+  <link rel="stylesheet" href="fonts/dotgothic16.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="narrow">
+    <h1 class="logo small-logo">分組登記</h1>
+    <form id="join-form" class="field form" novalidate>
+      <label for="code">班級代碼</label>
+      <input id="code" name="code" autocomplete="off" autocapitalize="characters" maxlength="10" required>
+      <label for="student-id">學號</label>
+      <input id="student-id" name="studentId" autocomplete="off" autocapitalize="characters" maxlength="20" required>
+      <label for="name">姓名</label>
+      <input id="name" name="name" autocomplete="name" maxlength="30" required>
+      <label for="group">組別</label>
+      <input id="group" name="group" type="number" inputmode="numeric" min="1" max="99" required>
+      <div class="actions"><button id="submit" type="submit" class="primary">送出</button></div>
+    </form>
+    <ul id="messages" class="messages" aria-live="polite"></ul>
+    <p class="form-hint">填錯了？用同一個學號再送一次就會更新。</p>
+  </main>
+  <footer class="credit">design by 陳愷 2026</footer>
+  <script src="src/join.js"></script>
+</body>
+</html>

@@ -619,4 +619,15 @@
   }
   refreshSetup();
   if (state.session) showSession();
+
+  // Opened from the teacher page with ?session=ID: fill the roster with that session's sign-ups.
+  const cloudId = new URLSearchParams(location.search).get('session');
+  if (cloudId) {
+    history.replaceState(null, '', location.pathname);
+    D.loadCloudRoster(cloudId).then(({ label, rows }) => {
+      setRows('roster-body', rows);
+      refreshSetup();
+      saveNote('roster', `已載入雲端名單：${label}（${rows.length} 人）`);
+    }, err => saveNote('roster', err.message));
+  }
 })();
