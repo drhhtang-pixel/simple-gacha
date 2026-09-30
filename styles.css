@@ -24,6 +24,7 @@ body {
   font-size: 18px;
 }
 main { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+.credit { text-align: center; color: var(--muted); font-size: 0.85rem; letter-spacing: 1px; padding: 8px 16px 24px; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 4px dashed var(--gold); outline-offset: 4px; }
 
