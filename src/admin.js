@@ -26,6 +26,9 @@
     });
     const body = await res.json().catch(() => ({}));
     if (res.status === 401 && path !== '/api/admin/login') showLogin();
+    if (!res.ok && !body.error && (res.status === 429 || res.headers.get('x-vercel-mitigated'))) {
+      throw new Error('操作太頻繁，請等一分鐘再試');
+    }
     if (!res.ok) throw new Error(body.error || `發生錯誤（${res.status}）`);
     return body;
   }

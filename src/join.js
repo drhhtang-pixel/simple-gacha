@@ -34,7 +34,9 @@
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) {
-        say(body.error || (res.status === 429 ? '太多次嘗試，請稍後再試' : '送出失敗，請再試一次'), 'error');
+        // The Vercel firewall's rate limit answers with a plain 403 (no JSON error of ours).
+        const limited = res.status === 429 || res.headers.get('x-vercel-mitigated') || (res.status === 403 && !body.error);
+        say(limited ? '太多人同時送出，請等一分鐘再試' : body.error || '送出失敗，請再試一次', 'error');
         return;
       }
       try { localStorage.setItem(REMEMBER, JSON.stringify({ studentId: body.studentId, name: body.name })); } catch { /* ignore */ }
